@@ -2,6 +2,7 @@ package sh.bash.log;
 
 import junit.framework.TestCase;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class StatsTest extends TestCase {
         averageList.add(6);
         averageList.add(8);
         averageList.add(10);
-        assertEquals(6.00, Stats.calculateAverage(averageList));
+        assertEquals(6.00, Stats.calculateMean(averageList));
 
 
     }
@@ -26,7 +27,28 @@ public class StatsTest extends TestCase {
             percentileList.add(counter);
         }
         assertEquals(990.0, Stats.calculatePercentile(percentileList, percentile));
+    }
 
+    public void testCalculateVariance() throws Exception {
+        List<Integer> varianceList = new ArrayList<>();
+        varianceList.add(2);
+        varianceList.add(4);
+        varianceList.add(6);
+        varianceList.add(8);
+        varianceList.add(10);
 
+        assertEquals(8.0, Stats.calculateVariance(varianceList));
+    }
+
+    public void testCalculateStdDev() throws Exception {
+        DecimalFormat df = new DecimalFormat("##.00");
+        List<Integer> stdDevList = new ArrayList<>();
+        stdDevList.add(2);
+        stdDevList.add(4);
+        stdDevList.add(6);
+        stdDevList.add(8);
+        stdDevList.add(10);
+
+        assertEquals("2.83", df.format(Stats.calculateStdDev(stdDevList)));
     }
 }

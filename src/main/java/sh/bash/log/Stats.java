@@ -9,18 +9,45 @@ import java.util.List;
  */
 public class Stats {
 
-    public static double calculateAverage(List<Integer> range) {
+    public static double calculateMean(List<Integer> range) {
         int total = 0;
+        double mean = 0;
         if (!range.isEmpty()) {
             for (Integer value : range) total += value;
-            return (double) total / range.size();
+            mean = (double) total / range.size();
+            return mean;
         }
-        return total;
+        return mean;
     }
 
     public static double calculatePercentile(List<Integer> range, Integer percentile) {
-        Collections.sort(range);
-        return range.get(range.size() * percentile / 100);
+        int result = 0;
+        if (!range.isEmpty()) {
+            Collections.sort(range);
+            result = range.get(range.size() * percentile / 100);
+            return result;
+        }
+        return result;
+    }
 
+    public static double calculateVariance(List<Integer> range) {
+        double variance = 0;
+        if (!range.isEmpty()) {
+            double mean = calculateMean(range);
+            for (Integer value : range) variance += (Math.pow(value - mean, 2))/range.size();
+            return variance;
+            }
+        return variance;
+    }
+
+    public static double calculateStdDev(List<Integer> range) {
+        double stdDev = 0;
+        if (!range.isEmpty()) {
+            double variance = calculateVariance(range);
+            stdDev = Math.sqrt(variance);
+            return stdDev;
+
+        }
+        return stdDev;
     }
 }
