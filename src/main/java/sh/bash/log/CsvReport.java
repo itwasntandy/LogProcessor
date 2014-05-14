@@ -22,14 +22,14 @@ public class CsvReport {
             List<Integer> respTime = logEntries.stream().map(LogEntry::getRespTime).collect(Collectors.toList());
             List<Integer> respSize = logEntries.stream().map(LogEntry::getRespSize).collect(Collectors.toList());
             int requestCount = groupFields.get(key).size();
-            double averageRespTime = Stats.calculateMean(respTime);
+            double meanRespTime = Stats.calculateMean(respTime);
             double percentile99RespTime = Stats.calculatePercentile(respTime, 99);
             double stdDevRespTime = Stats.calculateStdDev(respTime);
-            double averageRespSize = Stats.calculateMean(respSize);
+            double meanRespSize = Stats.calculateMean(respSize);
 
 
             csvWriter.println(Joiner.on(",").join(key, requestCount,
-                    df.format(averageRespTime), df.format(percentile99RespTime), df.format(stdDevRespTime), df.format(averageRespSize)));
+                    df.format(meanRespTime), df.format(percentile99RespTime), df.format(stdDevRespTime), df.format(meanRespSize)));
 
 
         }
