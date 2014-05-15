@@ -10,7 +10,7 @@ import java.util.List;
 public class Stats {
 
     public static double calculateMean(List<Integer> range) {
-        int total = 0;
+        long total = 0;
         double mean = 0;
         if (!range.isEmpty()) {
             for (Integer value : range) total += value;
