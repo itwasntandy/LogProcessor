@@ -24,11 +24,11 @@ JDK target is set to 1.8, as using Streams.
 Under OSX at least need to provide path to JDK8 as a result.
 e.g
 
-    JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home/ mvn clean test
+    JAVA_HOME=$(/usr/libexec/java_home -version 1.8) mvn clean test
 
 Compile with:
 
-    JAVA_HOME=//Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home/ mvn compile
+    JAVA_HOME=$(/usr/libexec/java_home -version 1.8) mvn compile
 
 
 
