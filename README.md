@@ -3,6 +3,8 @@ LogProcessor
 
 An access log processor which produces a CSV file of key performance metrics for URIs.
 It's reasonably quick - parsing 1M lines in ~7 seconds.
+Now reworked to use the java.util.function.Consumer interface, so can deal with very large files - as it no longer
+reads the whole file into memory.
 
 
 
@@ -33,15 +35,15 @@ Compile with:
 
 
 ##TODO
-* Redo logReader.read Method as currently it reads whole log into memory, which would make very large log files a proble
-    * Possibly using the new Java8 java.util.function.Consumer stuff?
 * allow override of paths using a run time argument.
     * e.g. -DlogPath="/var/log/tomcat/tomcat_access.log" -DcsvPath="/var/tmp/logStats.csv"
+    * this could be with system.getProperty("logPath)" or similar
 * enable LogParser to work with any typical access log format -perhaps to understand the grammar of an access log pattern
     * and thus make this portable to different access log formats.
     * e.g.
 
         pattern='"%{True-Client-IP}i" "%{X-Forwarded-For}i" %h %t "%r" %s %b %D "%{User-Agent}i" "%{SOAPAction}i" "%{Host}i" "%{Accept-Encoding}i" %p
+    * possibly use antlr or similar? maybe that's overkill
 
 * Add more Stats functions
     * produce histograms of response Code etc.

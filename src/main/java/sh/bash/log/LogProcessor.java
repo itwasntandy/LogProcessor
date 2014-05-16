@@ -38,10 +38,8 @@ public class LogProcessor {
         GroupFields groupFields = new GroupFields();
 
         LogReader logReader = new LogReader();
-        List<String> logLines = logReader.read(logPath);
-        for (String logLine : logLines) {
-            groupFields.add(logLine);
-        }
+        logReader.read(logPath, groupFields::add);
+
         Path csvPath = Paths.get(csvFile);
         try (FileWriter fileWriter = new FileWriter(csvPath.toFile())) {
             PrintWriter csvWriter = new PrintWriter(fileWriter);
